@@ -12,7 +12,9 @@ import unicodedata
 ROOT = Path(__file__).resolve().parents[1]
 BBOX = (-2.0, 42.0, 3.5, 43.6)  # west, south, east, north; a study window, not the massif boundary
 CATEGORIES = {'Parc national', 'PNR', 'Parc naturel', 'Réserve naturelle', 'Natura 2000',
-              'Site de conservatoire', 'Autre protection', 'Projet de PNR'}
+              'Site de conservatoire', 'Autre protection', 'Projet de PNR', 'Réserve biologique',
+              'Arrêté de protection', 'Conservatoire du littoral', 'Périmètre de protection',
+              'Reconnaissance internationale', 'Site classé', 'Parc naturel marin'}
 
 
 def normalized(s):
@@ -107,7 +109,7 @@ def collect_osm():
         country = {'FR': 'France', 'ES': 'Espagne', 'AD': 'Andorre'}.get(tags.get('addr:country'), '')
         f['properties'] = {
             'id': f'osm:{osm_type}/{osm_id}', 'name': tags.get('name:fr') or tags.get('name') or f'Espace OSM {osm_id}',
-            'category': classify(tags), 'country': country, 'status': 'Signalé dans OSM',
+            'category': classify(tags), 'country': country, 'status': 'Signalé dans OSM', 'evidence': 'osm',
             'operator': tags.get('operator', ''), 'reference': tags.get('ref:natura2000', tags.get('ref', '')),
             'source': 'OpenStreetMap / Overpass — ODbL',
             'url': f'https://www.openstreetmap.org/{osm_type}/{osm_id}', 'collected_at': collected,
@@ -123,8 +125,15 @@ def collect_osm():
 
 
 def build(official=(), refresh_osm=False, use_osm_cache=False):
-    features = load(ROOT / 'data/curated.geojson')['features']
-    sources = ['Sélection manuelle de repères (non vérifiée en ligne)']
+    official_path = ROOT / 'data/france-official.geojson'
+    official_features = load(official_path)['features'] if official_path.exists() else []
+    official_ids = {f['properties']['reference'] for f in official_features}
+    # Explicit official IDs replace documentary points. Do not merge distinct protections by proximity.
+    features = [f for f in load(ROOT / 'data/curated.geojson')['features']
+                if f['properties'].get('official_reference') not in official_ids]
+    features += official_features
+    sources = ['INPN / PatriNat — diffusion IGN Géoplateforme' if official_features else '',
+               'Repères documentaires Espagne, Andorre et projet de PNR du Pays basque']
     if refresh_osm:
         osm = collect_osm()
         validate(osm)
@@ -140,19 +149,26 @@ def build(official=(), refresh_osm=False, use_osm_cache=False):
     for path in official:
         features += load(path)['features']
         sources.append(f'Import normalisé : {Path(path).name}')
+    manifest_path = ROOT / 'data/france-sources.json'
+    manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+    n_official = sum(f['properties'].get('evidence') == 'official' for f in features)
+    n_points = sum(f['geometry']['type'] == 'Point' for f in features)
     result = {'type': 'FeatureCollection', 'metadata': {
-        'bbox': BBOX, 'exhaustive': False,
-        'notice': 'Version de travail — inventaire incomplet. Les repères manuels ne sont pas des contours officiels. '
-                  'Aucun total exhaustif des aires protégées ne peut encore être déduit de cette carte.',
-        'provenance': ' ; '.join(sources) + '. Voir les fiches pour les références, dates et limites.'},
-        'features': sorted(features, key=lambda f: (f['properties']['name'], f['properties']['id']))}
+        'bbox': BBOX, 'exhaustive': False, 'official_records': n_official,
+        'indicative_points': n_points, 'france_layers': manifest.get('layers', []),
+        'coverage': {'France': f'INPN / PatriNat : {len(manifest.get("layers", []))} couches collectées dans la fenêtre d’étude',
+                     'Espagne': 'Repères documentaires, inventaires officiels à intégrer',
+                     'Andorre': 'Repères documentaires, contours officiels à intégrer'},
+        'notice': f'{n_official} contours officiels · {n_points} repères indicatifs. Couverture transfrontalière incomplète.',
+        'provenance': ' ; '.join(s for s in sources if s) + '. Sources, dates et statut dans chaque fiche.'},
+        'features': sorted(features, key=lambda f: (normalized(f['properties']['name']), f['properties']['id']))}
     validate(result)
     output = ROOT / 'site/data/areas.geojson'
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_suffix('.tmp')
-    temporary.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
+    temporary.write_text(json.dumps(result, ensure_ascii=False, separators=(',', ':')) + '\n')
     temporary.replace(output)
-    print(f'{len(features)} enregistrements écrits dans {output}; inventaire non exhaustif.')
+    print(f'{len(features)} enregistrements écrits dans {output}; {n_official} officiels, inventaire non exhaustif.')
 
 
 if __name__ == '__main__':

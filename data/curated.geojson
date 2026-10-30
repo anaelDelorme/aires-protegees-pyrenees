@@ -19,7 +19,10 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://www.pyrenees-parcnational.fr/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point",
+        "official_reference": "FR3300003"
       }
     },
     {
@@ -40,7 +43,10 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://www.parc-pyrenees-ariegeoises.fr/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point",
+        "official_reference": "FR8000047"
       }
     },
     {
@@ -61,7 +67,10 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://www.parc-pyrenees-catalanes.fr/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point",
+        "official_reference": "FR8000044"
       }
     },
     {
@@ -82,7 +91,10 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://www.parcs-naturels-regionaux.fr/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point",
+        "official_reference": "FR8000059"
       }
     },
     {
@@ -103,7 +115,9 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://www.communaute-paysbasque.fr/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point"
       }
     },
     {
@@ -124,7 +138,9 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://www.miteco.gob.es/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point"
       }
     },
     {
@@ -145,7 +161,9 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://parcsnaturals.gencat.cat/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point"
       }
     },
     {
@@ -166,7 +184,9 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://www.aragon.es/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point"
       }
     },
     {
@@ -187,7 +207,9 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://www.aragon.es/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point"
       }
     },
     {
@@ -208,7 +230,9 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://parcsnaturals.gencat.cat/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point"
       }
     },
     {
@@ -229,7 +253,9 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://parcsnaturals.gencat.cat/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point"
       }
     },
     {
@@ -250,7 +276,9 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://parcsnaturals.gencat.cat/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point"
       }
     },
     {
@@ -271,7 +299,9 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://parcsnaturals.gencat.cat/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point"
       }
     },
     {
@@ -292,7 +322,9 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://parcsnaturals.gencat.cat/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point"
       }
     },
     {
@@ -313,7 +345,9 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://www.sorteny.ad/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point"
       }
     },
     {
@@ -334,7 +368,9 @@
         "source": "Sélection manuelle — vérification en ligne en attente",
         "url": "https://www.comapedrosa.ad/",
         "collected_at": null,
-        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire.",
+        "evidence": "reference",
+        "geometry_quality": "indicative_point"
       }
     }
   ]

@@ -1,35 +1,72 @@
-// Usage: NODE_PATH=/path/to/node_modules node tests/browser.cjs
-// Start python3 -m http.server 8000 --bind 127.0.0.1 --directory site first.
+// NODE_PATH=/path/to/node_modules node tests/browser.cjs
+// Start the site on http://127.0.0.1:8000 first.
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const data = JSON.parse(fs.readFileSync('site/data/areas.geojson','utf8'));
+const total = data.features.length;
 (async () => {
-  const browser = await chromium.launch({executablePath:process.env.CHROMIUM_PATH || '/usr/bin/chromium',headless:true,args:['--no-sandbox']});
-  try {
-    const page = await browser.newPage();
-    const errors=[];
-    page.on('pageerror', e=>errors.push(String(e)));
-    await page.route('https://tile.openstreetmap.org/**', r=>r.abort());
-    await page.goto('http://127.0.0.1:8000/');
-    await page.waitForFunction(()=>document.querySelector('#results button'));
-    assert.equal(await page.locator('#results button').count(),16);
-    await page.locator('#search').fill('Pays basque');
-    assert.equal(await page.locator('#results button').count(),1);
-    await page.locator('#results button').click();
-    assert.match(await page.locator('#detail').innerText(),/Projet/);
-    assert.match(await page.locator('#detail').innerText(),/sans contour/);
-    await page.getByRole('button',{name:'Réinitialiser les filtres'}).click();
-    await page.locator('#country').selectOption('Andorre');
-    assert.equal(await page.locator('#results button').count(),2);
-    const downloadPromise=page.waitForEvent('download');
-    await page.locator('#export').click();
-    const download=await downloadPromise;
-    assert.equal(download.suggestedFilename(),'pyrenees-selection.geojson');
-    await page.locator('#search').fill('aucun-espace-xyz');
-    assert.equal(await page.locator('#results button').count(),0);
-    assert.match(await page.locator('#results').innerText(),/Aucun espace/);
-    await page.setViewportSize({width:390,height:844});
-    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
-    assert.deepEqual(errors,[]);
-    console.log('Browser smoke passed: load, search, project detail, reset, country, export, empty result, mobile.');
-  } finally {await browser.close();}
+ const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
+ try {
+  const page=await browser.newPage({viewport:{width:1440,height:960}}),errors=[];
+  page.on('pageerror',e=>errors.push(String(e)));
+  await page.route('https://tile.openstreetmap.org/**',r=>r.abort());
+  await page.goto('http://127.0.0.1:8000/');
+  await page.waitForFunction(n=>document.querySelectorAll('#results button').length===n,total);
+  const sidebar=await page.locator('.sidebar').boundingBox(),map=await page.locator('.map-panel').boundingBox();
+  assert(sidebar.x+sidebar.width<=map.x+1,'List must sit beside map');
+  assert.equal(await page.locator('#detail').isVisible(),false);
+  await page.screenshot({path:'/tmp/atlas-desktop.png'});
+  await page.locator('#search').fill('Pays basque');
+  await page.waitForFunction(()=>document.querySelectorAll('#results button').length===1);
+  await page.locator('#results button').click();
+  assert.match(await page.locator('#detail').innerText(),/Projet/);
+  assert.match(await page.locator('#detail').innerText(),/sans contour/);
+  await page.getByRole('button',{name:'Fermer la fiche'}).click();
+  assert.equal(await page.locator('#detail').isVisible(),false);
+  await page.locator('#reset').click();
+  await page.locator('#quality').selectOption('official');
+  assert.equal(await page.locator('#results button').count(),data.metadata.official_records);
+  await page.locator('#search').fill('neouvielle');
+  await page.waitForFunction(()=>document.querySelectorAll('#results button').length>0 && [...document.querySelectorAll('#results button')].every(n=>n.innerText.toLowerCase().includes('néouvielle')));
+  await page.locator('#search').fill('FR3600004');
+  await page.waitForFunction(()=>document.querySelectorAll('#results button').length===1);
+  await page.locator('#results button').click();
+  assert.match(await page.locator('#detail').innerText(),/Contour officiel/);
+  assert(await page.locator('#detail a').count()>=2,'Official feature needs source and download');
+  await page.screenshot({path:'/tmp/atlas-detail.png'});
+  await page.keyboard.press('Escape');
+  assert.equal(await page.locator('#detail').isVisible(),false);
+  await page.locator('#reset').click();
+  await page.locator('#country').selectOption('Andorre');
+  assert.equal(await page.locator('#results button').count(),2);
+  const downloadPromise=page.waitForEvent('download');
+  await page.locator('#export').click();
+  const download=await downloadPromise;
+  const output=JSON.parse(fs.readFileSync(await download.path(),'utf8'));
+  assert.equal(output.features.length,2);
+  await page.locator('#search').fill('aucun-espace-xyz');
+  await page.waitForFunction(()=>document.querySelectorAll('#results button').length===0);
+  assert.match(await page.locator('#results').innerText(),/Aucun espace/);
+  await page.locator('#reset').click();
+  await page.locator('#method-open').click();
+  assert.equal(await page.locator('#method-dialog').isVisible(),true);
+  assert.equal(await page.locator('#source-table tr').count(),data.metadata.france_layers.length);
+  await page.keyboard.press('Escape');
+  assert.equal(await page.locator('#method-dialog').isVisible(),false);
+  await page.setViewportSize({width:390,height:844});
+  await page.screenshot({path:'/tmp/atlas-mobile-map.png'});
+  assert.equal(await page.locator('.sidebar').isVisible(),false);
+  await page.locator('#view-list').click();
+  assert.equal(await page.locator('.sidebar').isVisible(),true);
+  await page.locator('#search').fill('Pays basque');
+  await page.waitForFunction(()=>document.querySelectorAll('#results button').length===1);
+  await page.locator('#results button').click();
+  assert.equal(await page.locator('.map-panel').isVisible(),true);
+  assert.equal(await page.locator('#detail').isVisible(),true);
+  await page.screenshot({path:'/tmp/atlas-mobile-detail.png'});
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  assert.deepEqual(errors,[]);
+  console.log(`Browser passed: ${total} records, official polygons, source links, filters, sidebar, drawer, export, methodology, mobile.`);
+ }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

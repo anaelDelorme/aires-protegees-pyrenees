@@ -2,6 +2,8 @@
 """Verify that GitHub Pages actually serves the atlas and its required assets."""
 import argparse
 import json
+import hashlib
+from pathlib import Path
 import time
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
@@ -17,14 +19,23 @@ def verify(base_url):
                 raise ValueError(f'{path}: HTTP {response.status}')
             return response.read()
 
-    html = fetch('').decode('utf-8')
+    expected_root = Path(__file__).resolve().parents[1] / 'site'
+
+    def exact(path):
+        payload = fetch(path)
+        local_path = expected_root / (path or 'index.html')
+        if hashlib.sha256(payload).digest() != hashlib.sha256(local_path.read_bytes()).digest():
+            raise ValueError(f'{path or 'index.html'}: public content differs from the deployed commit')
+        return payload
+
+    html = exact('').decode('utf-8')
     if 'id="map"' not in html or 'app.js' not in html:
         raise ValueError('Pages does not serve the atlas index')
-    data = json.loads(fetch('data/areas.geojson'))
+    data = json.loads(exact('data/areas.geojson'))
     if data.get('type') != 'FeatureCollection' or not data.get('features'):
         raise ValueError('Published GeoJSON is missing or empty')
     for asset in ('app.js', 'style.css', 'vendor/leaflet.js', 'vendor/leaflet.css'):
-        if not fetch(asset):
+        if not exact(asset):
             raise ValueError(f'Empty asset: {asset}')
     print(f'Public atlas verified: {base_url} ({len(data["features"])} records)')
 

@@ -1,0 +1,249 @@
+{
+  "provider": "INPN / PatriNat, IGN WFS",
+  "bbox": [
+    -2.0,
+    42.0,
+    3.5,
+    43.6
+  ],
+  "simplification_degrees": 5e-05,
+  "layers": [
+    {
+      "layer": "patrinat_pn:parc_national",
+      "category": "Parc national",
+      "designation": "Parc national — cœur / aire d’adhésion",
+      "matched": 2,
+      "records": 2,
+      "collected_at": "2026-10-30T15:57:52.370699+00:00",
+      "raw_sha256": "79eefe6cee40ee710a99134abb710c9ef7a4a4415f139f114c175f51ced87648",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_pn%3Aparc_national&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_pnm:pnm",
+      "category": "Parc naturel marin",
+      "designation": "Parc naturel marin",
+      "matched": 1,
+      "records": 1,
+      "collected_at": "2026-10-30T16:03:24.073065+00:00",
+      "raw_sha256": "0db1bcc68bf5e3c0d9bcfe4bb9ec4b5fd170b3cfd12ab0994203876d50c8a68c",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_pnm%3Apnm&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_ripn:ripn",
+      "category": "Réserve naturelle",
+      "designation": "Réserve intégrale de parc national",
+      "matched": 0,
+      "records": 0,
+      "collected_at": "2026-10-30T16:03:24.864364+00:00",
+      "raw_sha256": "4173645db582c38e672c8e548f40a7f2f4a79abe7792100929654ecf9899083d",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_ripn%3Aripn&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_sc:sc",
+      "category": "Site classé",
+      "designation": "Site classé au titre du paysage",
+      "matched": 212,
+      "records": 212,
+      "collected_at": "2026-10-30T16:03:28.299019+00:00",
+      "raw_sha256": "5178e0317af38d85f53814e354c4320ef11cbff037f7f32872d93e3a227fcb43",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_sc%3Asc&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_pnr:pnr",
+      "category": "PNR",
+      "designation": "Parc naturel régional",
+      "matched": 5,
+      "records": 5,
+      "collected_at": "2026-10-30T15:57:53.466462+00:00",
+      "raw_sha256": "09a834a81c3e58c9757a29207c354ddd6dcc66a701030e1cddfeb4e5498744da",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_pnr%3Apnr&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_rnn:rnn",
+      "category": "Réserve naturelle",
+      "designation": "Réserve naturelle nationale",
+      "matched": 16,
+      "records": 16,
+      "collected_at": "2026-10-30T15:57:52.094895+00:00",
+      "raw_sha256": "4fa1642f0557d639815ff2e390440576e98e8c3bc9774c7b1ea081417f3f9296",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_rnn%3Arnn&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_rnr:rnr",
+      "category": "Réserve naturelle",
+      "designation": "Réserve naturelle régionale",
+      "matched": 10,
+      "records": 10,
+      "collected_at": "2026-10-30T15:57:53.168428+00:00",
+      "raw_sha256": "a13830c1061a91c3779d5143a04040caa3a92e85d8ed18aed1b95540d82f6f00",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_rnr%3Arnr&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_rnc:pnm",
+      "category": "Réserve naturelle",
+      "designation": "Réserve naturelle de Corse",
+      "matched": 0,
+      "records": 0,
+      "collected_at": "2026-10-30T15:57:53.908123+00:00",
+      "raw_sha256": "082b87d69effe643a6b74ad9a332eff6b2b73b2db05952336b76a29b6573614e",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_rnc%3Apnm&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_rb:rb",
+      "category": "Réserve biologique",
+      "designation": "Réserve biologique",
+      "matched": 17,
+      "records": 17,
+      "collected_at": "2026-10-30T15:57:53.745039+00:00",
+      "raw_sha256": "de5981e603e0a3f16e9bf16aee613be4f341ec0dc2cb06277f8bda919df2e3cb",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_rb%3Arb&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_apb:apb",
+      "category": "Arrêté de protection",
+      "designation": "Arrêté de protection de biotope",
+      "matched": 47,
+      "records": 47,
+      "collected_at": "2026-10-30T15:57:54.353462+00:00",
+      "raw_sha256": "add3c436ea74f1856b7971313182c23d5d184568f8587e0d9e2a5585ba0dcb83",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_apb%3Aapb&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_aphn:aphn",
+      "category": "Arrêté de protection",
+      "designation": "Arrêté de protection d’habitat naturel",
+      "matched": 0,
+      "records": 0,
+      "collected_at": "2026-10-30T15:57:54.079175+00:00",
+      "raw_sha256": "59518af68840fb051c81ca30b1d98cc99458e2cc69464595c60c1b8d6587f0bb",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_aphn%3Aaphn&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_apg:apg",
+      "category": "Arrêté de protection",
+      "designation": "Arrêté de protection de géotope",
+      "matched": 0,
+      "records": 0,
+      "collected_at": "2026-10-30T15:57:54.245760+00:00",
+      "raw_sha256": "1bbe90333b374b29939b8f7c22c0a7e777b74adc81c8ba33130ce73c630be7a2",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_apg%3Aapg&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_sic:sic",
+      "category": "Natura 2000",
+      "designation": "Natura 2000 — directive Habitats (SIC / ZSC)",
+      "matched": 139,
+      "records": 139,
+      "collected_at": "2026-10-30T15:57:57.079482+00:00",
+      "raw_sha256": "5931f3011d4a73a7b23984f72adb41982fa75ff0411bc00043d7f3a3c6b71db2",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_sic%3Asic&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_zps:zps",
+      "category": "Natura 2000",
+      "designation": "Natura 2000 — directive Oiseaux (ZPS)",
+      "matched": 54,
+      "records": 54,
+      "collected_at": "2026-10-30T15:57:55.457462+00:00",
+      "raw_sha256": "afd714e501a8ad93514adc8301f6201077f5e9d72b9fb691a9dc0dd18b6c102a",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_zps%3Azps&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_cen:cen",
+      "category": "Site de conservatoire",
+      "designation": "Terrain acquis des Conservatoires d’espaces naturels",
+      "matched": 74,
+      "records": 74,
+      "collected_at": "2026-10-30T15:57:55.868769+00:00",
+      "raw_sha256": "ac90bd45a22a9f9cda70cf3a53c54dc07fdf65a4a2feeb44755fdf90b5d8b009",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_cen%3Acen&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_cdl:conservatoire_littoral",
+      "category": "Conservatoire du littoral",
+      "designation": "Terrain du Conservatoire du littoral",
+      "matched": 48,
+      "records": 48,
+      "collected_at": "2026-10-30T15:57:56.628375+00:00",
+      "raw_sha256": "54d96a57c193cc432da3e12cb9584967e7ce932e870ad32c3dd1b5faace76802",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_cdl%3Aconservatoire_littoral&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_pprnn:pprnn",
+      "category": "Périmètre de protection",
+      "designation": "Périmètre de protection de réserve naturelle nationale",
+      "matched": 0,
+      "records": 0,
+      "collected_at": "2026-10-30T15:57:56.492841+00:00",
+      "raw_sha256": "bd94dc4370698f5a0582748f168f5cc9e17c6cbcfe1d5e523b96efd59efbd60a",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_pprnn%3Apprnn&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_pprnr:pprnr",
+      "category": "Périmètre de protection",
+      "designation": "Périmètre de protection de réserve naturelle régionale",
+      "matched": 0,
+      "records": 0,
+      "collected_at": "2026-10-30T15:57:56.878065+00:00",
+      "raw_sha256": "c0ec5f8b23325b111d1f9d134c7ce68111337b4fdcb8139f057a433252254d6f",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_pprnr%3Apprnr&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_rncfs:rncfs",
+      "category": "Autre protection",
+      "designation": "Réserve nationale de chasse et de faune sauvage",
+      "matched": 1,
+      "records": 1,
+      "collected_at": "2026-10-30T15:57:57.403578+00:00",
+      "raw_sha256": "7e852efcc87f88469d4d4655bcfb334fe7a34dc5fc317b64c8742b8956616d15",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_rncfs%3Arncfs&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_ramsar:ramsar",
+      "category": "Reconnaissance internationale",
+      "designation": "Site Ramsar",
+      "matched": 3,
+      "records": 3,
+      "collected_at": "2026-10-30T15:57:57.559897+00:00",
+      "raw_sha256": "2dffca70c9a034e13822425bc51b22ba11bd294541d488134c6a4ddd496567ac",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_ramsar%3Aramsar&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    },
+    {
+      "layer": "patrinat_bios:bios",
+      "category": "Reconnaissance internationale",
+      "designation": "Réserve de biosphère UNESCO",
+      "matched": 0,
+      "records": 0,
+      "collected_at": "2026-10-30T15:57:57.827051+00:00",
+      "raw_sha256": "de80837486a273a97d49c11c9fdb7964d3d379bef5dc28b58a34e4624e05a330",
+      "url": "https://data.geopf.fr/wfs/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=patrinat_bios%3Abios&outputFormat=application%2Fjson&srsName=CRS%3A84&bbox=-2.0%2C42.0%2C3.5%2C43.6%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=100&startIndex=0",
+      "state": "collected"
+    }
+  ],
+  "limitations": [
+    "Fenêtre géographique, pas une délimitation administrative du massif.",
+    "CEN : terrains acquis renseignés dans cette couche, pas tous les sites gérés.",
+    "France uniquement. Les données sources peuvent être anciennes.",
+    "Les désignations et secteurs superposés sont des enregistrements distincts."
+  ]
+}
