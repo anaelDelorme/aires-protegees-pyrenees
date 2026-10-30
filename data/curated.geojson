@@ -1,0 +1,341 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1,
+          42.85
+        ]
+      },
+      "properties": {
+        "id": "manual:1",
+        "name": "Parc national des Pyrénées",
+        "category": "Parc national",
+        "country": "France",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://www.pyrenees-parcnational.fr/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.25,
+          42.9
+        ]
+      },
+      "properties": {
+        "id": "manual:2",
+        "name": "Parc naturel régional des Pyrénées ariégeoises",
+        "category": "PNR",
+        "country": "France",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://www.parc-pyrenees-ariegeoises.fr/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.05,
+          42.55
+        ]
+      },
+      "properties": {
+        "id": "manual:3",
+        "name": "Parc naturel régional des Pyrénées catalanes",
+        "category": "PNR",
+        "country": "France",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://www.parc-pyrenees-catalanes.fr/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.5,
+          42.85
+        ]
+      },
+      "properties": {
+        "id": "manual:4",
+        "name": "Parc naturel régional Corbières-Fenouillèdes",
+        "category": "PNR",
+        "country": "France",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://www.parcs-naturels-regionaux.fr/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.2,
+          43.12
+        ]
+      },
+      "properties": {
+        "id": "manual:5",
+        "name": "Projet de PNR du Pays basque",
+        "category": "Projet de PNR",
+        "country": "France",
+        "status": "Projet",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://www.communaute-paysbasque.fr/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0,
+          42.65
+        ]
+      },
+      "properties": {
+        "id": "manual:6",
+        "name": "Parque Nacional de Ordesa y Monte Perdido",
+        "category": "Parc national",
+        "country": "Espagne",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://www.miteco.gob.es/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.95,
+          42.58
+        ]
+      },
+      "properties": {
+        "id": "manual:7",
+        "name": "Parc Nacional d’Aigüestortes i Estany de Sant Maurici",
+        "category": "Parc national",
+        "country": "Espagne",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://parcsnaturals.gencat.cat/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.72,
+          42.83
+        ]
+      },
+      "properties": {
+        "id": "manual:8",
+        "name": "Parque Natural de los Valles Occidentales",
+        "category": "Parc naturel",
+        "country": "Espagne",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://www.aragon.es/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.55,
+          42.67
+        ]
+      },
+      "properties": {
+        "id": "manual:9",
+        "name": "Parque Natural Posets-Maladeta",
+        "category": "Parc naturel",
+        "country": "Espagne",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://www.aragon.es/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.3,
+          42.6
+        ]
+      },
+      "properties": {
+        "id": "manual:10",
+        "name": "Parc Natural de l’Alt Pirineu",
+        "category": "Parc naturel",
+        "country": "Espagne",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://parcsnaturals.gencat.cat/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.85,
+          42.29
+        ]
+      },
+      "properties": {
+        "id": "manual:11",
+        "name": "Parc Natural del Cadí-Moixeró",
+        "category": "Parc naturel",
+        "country": "Espagne",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://parcsnaturals.gencat.cat/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2,
+          42.4
+        ]
+      },
+      "properties": {
+        "id": "manual:12",
+        "name": "Parc Natural de les Capçaleres del Ter i del Freser",
+        "category": "Parc naturel",
+        "country": "Espagne",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://parcsnaturals.gencat.cat/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.95,
+          42.45
+        ]
+      },
+      "properties": {
+        "id": "manual:13",
+        "name": "Paratge Natural d’Interès Nacional de l’Albera",
+        "category": "Autre protection",
+        "country": "Espagne",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://parcsnaturals.gencat.cat/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.23,
+          42.31
+        ]
+      },
+      "properties": {
+        "id": "manual:14",
+        "name": "Parc Natural de Cap de Creus",
+        "category": "Parc naturel",
+        "country": "Espagne",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://parcsnaturals.gencat.cat/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.56,
+          42.62
+        ]
+      },
+      "properties": {
+        "id": "manual:15",
+        "name": "Parc Natural de la Vall de Sorteny",
+        "category": "Parc naturel",
+        "country": "Andorre",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://www.sorteny.ad/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.45,
+          42.59
+        ]
+      },
+      "properties": {
+        "id": "manual:16",
+        "name": "Parc Natural Comunal de les Valls del Comapedrosa",
+        "category": "Parc naturel",
+        "country": "Andorre",
+        "status": "Référence documentaire",
+        "source": "Sélection manuelle — vérification en ligne en attente",
+        "url": "https://www.comapedrosa.ad/",
+        "collected_at": null,
+        "note": "Localisation approximative pour le repérage uniquement. Aucun contour officiel. Inclusion et statut à vérifier auprès du gestionnaire."
+      }
+    }
+  ]
+}
