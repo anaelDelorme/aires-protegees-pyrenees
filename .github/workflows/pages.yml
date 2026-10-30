@@ -28,3 +28,7 @@ jobs:
           path: site
       - uses: actions/deploy-pages@v4
         id: deployment
+      - name: Vérifier le site public et ses données
+        env:
+          PAGES_URL: ${{ steps.deployment.outputs.page_url }}
+        run: python scripts/check_public_site.py "$PAGES_URL"
