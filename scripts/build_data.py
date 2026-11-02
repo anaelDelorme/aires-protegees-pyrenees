@@ -168,6 +168,8 @@ def build(official=(), refresh_osm=False, use_osm_cache=False):
     temporary = output.with_suffix('.tmp')
     temporary.write_text(json.dumps(result, ensure_ascii=False, separators=(',', ':')) + '\n')
     temporary.replace(output)
+    from build_admin_index import build_index
+    build_index(result)
     print(f'{len(features)} enregistrements écrits dans {output}; {n_official} officiels, inventaire non exhaustif.')
 
 

@@ -35,6 +35,17 @@ class DataTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate(bad)
 
+    def test_administrative_memberships_and_cross_department_park(self):
+        admin = json.loads((ROOT / 'site/data/admin-index.json').read_text())
+        self.assertEqual(admin['memberships']['inpn:FR3600004'], ['65'])
+        self.assertEqual(admin['memberships']['inpn:FR3300003'], ['64', '65'])
+        self.assertEqual(admin['departments']['64']['region_name'], 'Nouvelle-Aquitaine')
+        self.assertEqual(admin['departments']['65']['region_name'], 'Occitanie')
+        data = json.loads((ROOT / 'site/data/areas.geojson').read_text())
+        french_ids = {f['properties']['id'] for f in data['features'] if f['properties']['country'] == 'France'}
+        self.assertEqual(set(admin['memberships']), french_ids)
+        self.assertEqual(admin['metadata']['license'], 'Licence Ouverte')
+
     def test_reject_unsafe_source_link(self):
         data = json.loads((ROOT / 'data/curated.geojson').read_text())
         data['features'][0]['properties']['url'] = 'javascript:alert(1)'

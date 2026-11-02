@@ -108,3 +108,9 @@ Le dépôt `anaelDelorme/aires-protegees-pyrenees` est configuré en **Settings 
 - Leaflet 1.9.4 : BSD-2-Clause, voir `site/vendor/LICENSE`.
 
 La date d’un inventaire et sa précision géométrique doivent toujours accompagner son utilisation. Une carte ne permet pas de conclure seule à l’applicabilité d’une règle de protection.
+
+## Filtres administratifs français
+
+France est disponible dans le filtre Pays. Les filtres Région et Département se synchronisent et concernent les territoires présents dans cet atlas des Pyrénées, pas un inventaire national. Une protection traversant plusieurs départements est retenue dans chacun. Les espaces marins sans intersection terrestre restent visibles sans filtre administratif. Les repères étrangers ne reçoivent aucun rattachement français.
+
+Rattachements indicatifs par intersection avec les contours simplifiés IGN ADMIN EXPRESS COG 2018, conversion [france-geojson](https://github.com/gregoiredavid/france-geojson), révision `5d34ee6d0140c29f785fdb047d9329f1aab58833`, Licence Ouverte, récupérés le 2 novembre 2026. Les contours retenus et leur provenance sont conservés dans `data/france-administrative.geojson`. Ils ne constituent pas une vérification juridique des limites actuelles. Reconstruction hors ligne : `/workspace/pyrenees-venv/bin/python scripts/build_admin_index.py` ; également exécutée par `build_data.py`.

@@ -14,6 +14,7 @@ const qualityLabel=p=>quality(p)==='official'?'Contour officiel':quality(p)==='o
 const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('fr');
 function safeLink(url,label){try{const u=new URL(url);if(!['https:','http:'].includes(u.protocol))return null;const a=text('a',label);a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';return a;}catch{return null;}}
 function date(value){if(!value)return 'Non renseignée';const d=new Date(String(value).replace(/Z$/,'').slice(0,10));return Number.isNaN(d.getTime())?String(value):d.toLocaleDateString('fr-FR',{timeZone:'UTC'});}
+let administration;
 let data,visible=[],selectedId=null,selectedButton=null,layerGroup;
 const layers=new Map();
 const map=L.map('map',{zoomControl:false,preferCanvas:true,minZoom:5}).setView([42.8,.7],7);
@@ -41,6 +42,8 @@ function show(feature,button){
  const body=el('detail-body');body.replaceChildren();const eyebrow=text('div',p.category+' · '+(p.country||'Pays non renseigné'),'detail-eyebrow');const dot=text('span','','swatch');dot.style.background=types[p.category]||'#777';eyebrow.prepend(dot);const title=text('h2',p.name);title.id='detail-title';const badge=text('span',p.status==='Projet'?'Projet · sans contour de classement':qualityLabel(p),'detail-badge'+(quality(p)!=='official'?' indicative':''));body.append(eyebrow,title,badge);
  const dl=document.createElement('dl');
  const fields={'Désignation':p.designation||p.category,'Gestionnaire':p.operator||'Non renseigné','Référence':p.reference||p.id,'Statut dans la source':p.status,'Géométrie':p.geometry_quality==='official_simplified'?'Contour officiel simplifié (~4–6 m)':feature.geometry.type==='Point'?'Point indicatif, sans contour':'Contour fourni par la source'};
+ if(p.regions?.length)fields['Région(s) · indicatif']=p.regions.map(code=>Object.values(administration.departments).find(d=>d.region_code===code).region_name).join(' / ');
+ if(p.departments?.length)fields['Département(s) · indicatif']=p.departments.map(code=>code+' · '+administration.departments[code].nom).join(' / ');
  if(p.source_modified)fields['Mise à jour source']=date(p.source_modified);
  if(p.source_term_end)fields['Échéance renseignée (à vérifier)']=date(p.source_term_end);
  fields['Date de collecte']=p.collected_at?date(p.collected_at):'Vérification en ligne en attente';
@@ -58,8 +61,8 @@ function render(){
  if(!data)return;
  closeDetail();if(layerGroup)map.removeLayer(layerGroup);layers.clear();layerGroup=L.featureGroup().addTo(map);
  const chosen=new Set([...document.querySelectorAll('#filters input:checked')].map(n=>n.value));
- const query=normalize(el('search').value),country=el('country').value,evidence=el('quality').value;
- visible=data.features.filter(f=>{const p=f.properties;return chosen.has(p.category)&&(!country||(p.country||'').split(' / ').includes(country))&&(!evidence||quality(p)===evidence)&&normalize([p.name,p.operator,p.reference,p.designation].join(' ')).includes(query);});
+ const query=normalize(el('search').value),country=el('country').value,evidence=el('quality').value,region=el('region').value,department=el('department').value;
+ visible=data.features.filter(f=>{const p=f.properties;return chosen.has(p.category)&&(!country||(p.country||'').split(' / ').includes(country))&&(!region||(p.regions||[]).includes(region))&&(!department||(p.departments||[]).includes(department))&&(!evidence||quality(p)===evidence)&&normalize([p.name,p.operator,p.reference,p.designation].join(' ')).includes(query);});
  const priority=['Parc national','PNR','Parc naturel','Parc naturel marin','Projet de PNR','Réserve naturelle','Réserve biologique','Natura 2000','Site de conservatoire','Conservatoire du littoral','Arrêté de protection','Périmètre de protection','Reconnaissance internationale','Site classé','Autre protection'];
  visible.sort((a,b)=>priority.indexOf(a.properties.category)-priority.indexOf(b.properties.category)||a.properties.name.localeCompare(b.properties.name,'fr'));
  const list=el('results');list.replaceChildren();const fragment=document.createDocumentFragment();
@@ -71,13 +74,25 @@ function render(){
  const projects=visible.filter(f=>f.properties.status==='Projet').length;el('count').textContent=`${visible.length.toLocaleString('fr-FR')} enregistrements${projects?' · '+projects+' projet':''}`;el('type-count').textContent=`${chosen.size} / ${Object.keys(types).length}`;
 }
 for(const [name,color] of Object.entries(types)){const label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.value=name;input.checked=true;input.onchange=render;const swatch=text('span','','swatch');swatch.style.background=color;const total=text('span','','type-total');total.dataset.category=name;label.append(input,swatch,document.createTextNode(name),total);el('filters').append(label);}
-let searchTimer;el('search').oninput=()=>{clearTimeout(searchTimer);searchTimer=setTimeout(render,140);};el('country').onchange=render;el('quality').onchange=render;
+let searchTimer;el('search').oninput=()=>{clearTimeout(searchTimer);searchTimer=setTimeout(render,140);};el('country').onchange=()=>{el('region').value='';el('department').value='';updateAdministrativeFilters();render();};el('region').onchange=()=>{if(el('region').value)el('country').value='France';el('department').value='';updateAdministrativeFilters();render();};el('department').onchange=()=>{if(el('department').value){el('country').value='France';el('region').value=administration.departments[el('department').value].region_code;}updateAdministrativeFilters();render();};el('quality').onchange=render;
 function selectTypes(checked){document.querySelectorAll('#filters input').forEach(n=>n.checked=checked);render();}el('types-all').onclick=()=>selectTypes(true);el('types-none').onclick=()=>selectTypes(false);
-el('reset').onclick=()=>{el('search').value='';el('country').value='';el('quality').value='';selectTypes(true);};
+el('reset').onclick=()=>{el('search').value='';el('country').value='';el('quality').value='';el('region').value='';el('department').value='';updateAdministrativeFilters();selectTypes(true);};
 el('export').onclick=()=>{if(!data)return;const output={...data,metadata:{...data.metadata,exported_at:new Date().toISOString(),selection_records:visible.length},features:visible};const url=URL.createObjectURL(new Blob([JSON.stringify(output)],{type:'application/geo+json'}));const a=document.createElement('a');a.href=url;a.download='pyrenees-selection.geojson';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 function method(){el('method-dialog').showModal();}el('method-open').onclick=method;el('legend-method').onclick=method;el('method-close').onclick=()=>el('method-dialog').close();el('method-dialog').onclick=e=>{if(e.target===el('method-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!el('method-dialog').open)closeDetail();});
-fetch('data/areas.geojson').then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).then(value=>{data=value;el('notice').textContent=data.metadata.notice;el('provenance').textContent=data.metadata.provenance;
+function updateAdministrativeFilters(){
+ if(!administration)return;
+ const disabled=Boolean(el('country').value&&el('country').value!=='France');
+ const regionValue=el('region').value,departmentValue=el('department').value;
+ const departments=Object.values(administration.departments);
+ const regions=new Map(departments.map(d=>[d.region_code,d.region_name]));
+ function options(id,placeholder,values,selected){const select=el(id);select.replaceChildren(new Option(placeholder,''));for(const [value,label] of values)select.add(new Option(label,value));select.value=selected;select.disabled=disabled;}
+ options('region','Toutes les régions',[...regions].sort((a,b)=>a[1].localeCompare(b[1],'fr')),regionValue);
+ options('department','Tous les départements',departments.filter(d=>!regionValue||d.region_code===regionValue).sort((a,b)=>a.code.localeCompare(b.code)).map(d=>[d.code,d.code+' · '+d.nom]),departmentValue);
+}
+Promise.all(['data/areas.geojson','data/admin-index.json'].map(path=>fetch(path).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}))).then(([value,index])=>{data=value;administration=index;
+ for(const feature of data.features){const p=feature.properties;p.departments=index.memberships[p.id]||[];p.regions=[...new Set(p.departments.map(code=>index.departments[code].region_code))];}
+ updateAdministrativeFilters();el('notice').textContent=data.metadata.notice;el('provenance').textContent=data.metadata.provenance;
  const totals=new Map();for(const f of data.features)totals.set(f.properties.category,(totals.get(f.properties.category)||0)+1);document.querySelectorAll('.type-total').forEach(n=>n.textContent=totals.get(n.dataset.category)||0);
  el('france-coverage').textContent=`${data.metadata.official_records||0} contours officiels INPN / PatriNat, diffusés par l’IGN. ${data.metadata.france_layers?.length||0} couches collectées.`;
  for(const source of data.metadata.france_layers||[]){const row=document.createElement('tr');row.append(text('td',source.designation),text('td',source.records),text('td',date(source.collected_at)));el('source-table').append(row);}render();resetExtent();

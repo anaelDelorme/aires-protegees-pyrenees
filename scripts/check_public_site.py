@@ -34,7 +34,7 @@ def verify(base_url):
     data = json.loads(exact('data/areas.geojson'))
     if data.get('type') != 'FeatureCollection' or not data.get('features'):
         raise ValueError('Published GeoJSON is missing or empty')
-    for asset in ('app.js', 'style.css', 'vendor/leaflet.js', 'vendor/leaflet.css'):
+    for asset in ('app.js', 'style.css', 'vendor/leaflet.js', 'vendor/leaflet.css', 'data/admin-index.json'):
         if not exact(asset):
             raise ValueError(f'Empty asset: {asset}')
     print(f'Public atlas verified: {base_url} ({len(data["features"])} records)')
