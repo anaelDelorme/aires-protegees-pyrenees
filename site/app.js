@@ -19,7 +19,7 @@ const layers=new Map();
 const map=L.map('map',{zoomControl:false,preferCanvas:true,minZoom:5}).setView([42.8,.7],7);
 L.control.zoom({position:'bottomright'}).addTo(map);
 L.control.scale({position:'bottomright',imperial:false}).addTo(map);
-const tiles=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{maxZoom:18,subdomains:'abcd',className:'atlas-basemap',attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
+const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,className:'atlas-basemap',attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
 // A separate, non-interactive outline keeps the selection visible above overlapping zones.
 map.createPane('selection');map.getPane('selection').style.zIndex=450;map.getPane('selection').style.pointerEvents='none';
 const selection=L.layerGroup().addTo(map);

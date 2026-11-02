@@ -10,7 +10,7 @@ const total = data.features.length;
  try {
   const page=await browser.newPage({viewport:{width:1440,height:960}}),errors=[];
   page.on('pageerror',e=>errors.push(String(e)));
-  await page.route('https://*.basemaps.cartocdn.com/**',r=>r.abort());
+  await page.route('https://tile.openstreetmap.org/**',r=>r.abort());
   await page.goto('http://127.0.0.1:8000/');
   await page.waitForFunction(n=>document.querySelectorAll('#results button').length===n,total);
   const sidebar=await page.locator('.sidebar').boundingBox(),map=await page.locator('.map-panel').boundingBox();

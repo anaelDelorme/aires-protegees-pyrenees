@@ -41,7 +41,7 @@ node --check site/app.js
 python3 -m http.server 8000 --bind 127.0.0.1 --directory site
 ```
 
-Le GeoJSON se charge par HTTP. Pas de compilation nécessaire. Le fond clair CARTO (données OpenStreetMap) nécessite Internet ; les contours et fiches restent utilisables sans tuiles. Les données sont dans `site/data/areas.geojson`, les sources françaises normalisées dans `data/france-official.geojson`, la couverture des couches dans `data/france-sources.json`.
+Le GeoJSON se charge par HTTP. Pas de compilation nécessaire. Le fond OpenStreetMap, atténué en niveaux de gris et sans clé API, nécessite Internet ; les contours et fiches restent utilisables sans tuiles. Les données sont dans `site/data/areas.geojson`, les sources françaises normalisées dans `data/france-official.geojson`, la couverture des couches dans `data/france-sources.json`.
 
 ## Obtenir les contours officiels et reproduire l’inventaire
 
@@ -104,7 +104,7 @@ Le dépôt `anaelDelorme/aires-protegees-pyrenees` est configuré en **Settings 
 - France : INPN / PatriNat, diffusion IGN Géoplateforme. Données INPN sous Licence Ouverte / Open Licence ; chaque fiche conserve ses références et dates.
 - PNR : [Fédération des PNR](https://www.parcs-naturels-regionaux.fr/) et fiches INPN ; le registre cartographique fournit les polygones.
 - [MITECO](https://www.miteco.gob.es/), autorités régionales espagnoles et [Medi Ambient Andorre](https://www.mediambient.ad/) : sources à intégrer, pas des contours déjà présents.
-- Fond clair : © CARTO (Positron). Données du fond et données OSM éventuelles : © contributeurs OpenStreetMap, ODbL.
+- Fond OpenStreetMap atténué en niveaux de gris, sans clé API. Données du fond et données OSM éventuelles : © contributeurs OpenStreetMap, ODbL.
 - Leaflet 1.9.4 : BSD-2-Clause, voir `site/vendor/LICENSE`.
 
 La date d’un inventaire et sa précision géométrique doivent toujours accompagner son utilisation. Une carte ne permet pas de conclure seule à l’applicabilité d’une règle de protection.

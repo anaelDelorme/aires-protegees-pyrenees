@@ -4,4 +4,4 @@
 @media(max-width:720px){.github-link{display:none}}
 
 /* Keep cartographic context quiet; the thematic layers retain their colours. */
-.atlas-basemap{filter:grayscale(1) contrast(.88) brightness(1.06)}
+.atlas-basemap{filter:grayscale(1) saturate(0) contrast(.65) brightness(1.25)}
