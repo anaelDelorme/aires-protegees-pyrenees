@@ -1,11 +1,11 @@
 'use strict';
 const types={
-  'Parc national':'#26634d','PNR':'#7b9452','Parc naturel':'#3e8b7d',
-  'Parc naturel marin':'#31849b','Site classé':'#9c9272',
-  'Réserve naturelle':'#ac785b','Réserve biologique':'#936d9f','Natura 2000':'#528db8',
-  'Site de conservatoire':'#b59c45','Conservatoire du littoral':'#5bafb1',
-  'Arrêté de protection':'#b96e81','Périmètre de protection':'#a68c79',
-  'Reconnaissance internationale':'#8583aa','Autre protection':'#8b9590','Projet de PNR':'#c39135'
+  'Parc national':'#12613d','PNR':'#688022','Parc naturel':'#00796b',
+  'Parc naturel marin':'#006b91','Site classé':'#90651b',
+  'Réserve naturelle':'#bd4c22','Réserve biologique':'#803cab','Natura 2000':'#185fbd',
+  'Site de conservatoire':'#a57800','Conservatoire du littoral':'#007d87',
+  'Arrêté de protection':'#bd285b','Périmètre de protection':'#87533d',
+  'Reconnaissance internationale':'#5955b5','Autre protection':'#52645c','Projet de PNR':'#b77a00'
 };
 const el=id=>document.getElementById(id);
 const text=(tag,value,className)=>{const n=document.createElement(tag);n.textContent=value;if(className)n.className=className;return n;};
@@ -19,16 +19,24 @@ const layers=new Map();
 const map=L.map('map',{zoomControl:false,preferCanvas:true,minZoom:5}).setView([42.8,.7],7);
 L.control.zoom({position:'bottomright'}).addTo(map);
 L.control.scale({position:'bottomright',imperial:false}).addTo(map);
-const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+const tiles=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{maxZoom:18,subdomains:'abcd',className:'atlas-basemap',attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
+// A separate, non-interactive outline keeps the selection visible above overlapping zones.
+map.createPane('selection');map.getPane('selection').style.zIndex=450;map.getPane('selection').style.pointerEvents='none';
+const selection=L.layerGroup().addTo(map);
 let tileFailure=false;
 tiles.on('tileerror',()=>{if(tileFailure)return;tileFailure=true;el('map-caption').textContent='Fond indisponible — contours et fiches restent consultables';});
 function switchView(view){document.body.dataset.view=view;el('view-map').setAttribute('aria-pressed',String(view==='map'));el('view-list').setAttribute('aria-pressed',String(view==='list'));if(view==='map')requestAnimationFrame(()=>map.invalidateSize());}
 el('view-map').onclick=()=>switchView('map');el('view-list').onclick=()=>switchView('list');
 function resetExtent(){map.fitBounds([[42,-2],[43.6,3.5]],{padding:[25,25],animate:false});}
 el('fit').onclick=resetExtent;
-function closeDetail(){el('detail').hidden=true;selectedId=null;if(selectedButton)selectedButton.setAttribute('aria-pressed','false');selectedButton=null;}
+function closeDetail(){selection.clearLayers();el('detail').hidden=true;selectedId=null;if(selectedButton)selectedButton.setAttribute('aria-pressed','false');selectedButton=null;}
 el('detail-close').onclick=()=>{const button=selectedButton;closeDetail();if(button&&document.body.dataset.view==='list')button.focus();};
 function show(feature,button){
+ selection.clearLayers();
+ if(feature.geometry.type!=='Point'){
+  L.geoJSON(feature,{pane:'selection',interactive:false,style:{color:'#fff',weight:7,opacity:1,fill:false}}).addTo(selection);
+  L.geoJSON(feature,{pane:'selection',interactive:false,style:{color:'#173e35',weight:3.5,opacity:1,fillColor:types[feature.properties.category],fillOpacity:.18}}).addTo(selection);
+ }else L.geoJSON(feature,{pointToLayer:(_,ll)=>L.circleMarker(ll,{pane:'selection',interactive:false,radius:10,color:'#173e35',weight:3,fillColor:'#fff',fillOpacity:.6})}).addTo(selection);
  const p=feature.properties;selectedId=p.id;if(selectedButton)selectedButton.setAttribute('aria-pressed','false');selectedButton=button||document.querySelector(`[data-feature-id="${CSS.escape(p.id)}"]`);if(selectedButton)selectedButton.setAttribute('aria-pressed','true');
  const body=el('detail-body');body.replaceChildren();const eyebrow=text('div',p.category+' · '+(p.country||'Pays non renseigné'),'detail-eyebrow');const dot=text('span','','swatch');dot.style.background=types[p.category]||'#777';eyebrow.prepend(dot);const title=text('h2',p.name);title.id='detail-title';const badge=text('span',p.status==='Projet'?'Projet · sans contour de classement':qualityLabel(p),'detail-badge'+(quality(p)!=='official'?' indicative':''));body.append(eyebrow,title,badge);
  const dl=document.createElement('dl');
@@ -57,7 +65,7 @@ function render(){
  const list=el('results');list.replaceChildren();const fragment=document.createDocumentFragment();
  // Larger polygons first; small reserves and sites stay clickable above regional parks.
  const ordered=[...visible].sort((a,b)=>(b.properties.source_area_ha||0)-(a.properties.source_area_ha||0));
- for(const feature of ordered){const p=feature.properties,color=types[p.category]||'#888';const layer=L.geoJSON(feature,{style:{color,weight:1.4,fillOpacity:.12,dashArray:p.status==='Projet'?'5 4':null},pointToLayer:(_,ll)=>L.circleMarker(ll,{radius:6,color,fillColor:'#fff',weight:2,fillOpacity:1})}).addTo(layerGroup);layer.bindTooltip(text('span',p.name),{sticky:true});layer.on('click',()=>show(feature));layers.set(p.id,layer);}
+ for(const feature of ordered){const p=feature.properties,color=types[p.category]||'#888';const layer=L.geoJSON(feature,{style:{color,weight:2.2,opacity:1,fillColor:color,fillOpacity:.24,dashArray:p.status==='Projet'?'5 4':null},pointToLayer:(_,ll)=>L.circleMarker(ll,{radius:6,color,fillColor:'#fff',weight:2,fillOpacity:1})}).addTo(layerGroup);layer.bindTooltip(text('span',p.name),{sticky:true});layer.on('mouseover',()=>{if(feature.geometry.type!=='Point')layer.setStyle({weight:3.5,fillOpacity:.36});});layer.on('mouseout',()=>{if(feature.geometry.type!=='Point')layer.resetStyle();});layer.on('click',()=>show(feature));layers.set(p.id,layer);}
  for(const feature of visible){const p=feature.properties;const li=document.createElement('li'),button=text('button','','result-card');button.dataset.featureId=p.id;button.setAttribute('aria-pressed','false');const top=text('div','','result-top'),swatch=text('span','','swatch');swatch.style.background=types[p.category]||'#777';top.append(swatch,document.createTextNode(p.category));const bottom=text('div','','result-bottom');bottom.append(text('span',p.country||'Pays non renseigné'),text('span','','quality-dot'),text('span',p.status==='Projet'?'En projet':qualityLabel(p)));const arrow=text('span','','arrow');arrow.setAttribute('aria-hidden','true');arrow.innerHTML='<svg viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>';button.append(top,text('h2',p.name),bottom,arrow);button.onclick=()=>show(feature,button);li.append(button);fragment.append(li);}
  list.append(fragment);if(!visible.length)list.append(text('li','Aucun espace ne correspond. Essayez un autre filtre.','empty-state'));
  const projects=visible.filter(f=>f.properties.status==='Projet').length;el('count').textContent=`${visible.length.toLocaleString('fr-FR')} enregistrements${projects?' · '+projects+' projet':''}`;el('type-count').textContent=`${chosen.size} / ${Object.keys(types).length}`;
